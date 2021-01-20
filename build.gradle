@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+}
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    maven { url 'https://maven.aliyun.com/repository/public/' }
+    mavenCentral()
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.springframework/spring-context
+    compile group: 'org.springframework', name: 'spring-context', version: '5.3.1'
+    // https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf
+    compile group: 'org.thymeleaf', name: 'thymeleaf', version: '3.0.11.RELEASE'
+    // https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring5
+    compile group: 'org.thymeleaf', name: 'thymeleaf-spring5', version: '3.0.11.RELEASE'
+
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+jar {
+    String someString = ''
+    configurations.runtime.each { someString = someString + " lib//" + it.name }
+    manifest {
+        attributes 'Main-Class': 'com.ycncc.App'
+        attributes 'Class-Path': someString
+    }
+}
+test {
+    useJUnitPlatform()
+}

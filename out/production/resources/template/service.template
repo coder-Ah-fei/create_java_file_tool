@@ -1,0 +1,18 @@
+package [[${packageName}]].service;
+
+/**
+ * 描述：
+ *
+ * @author Administrator
+ */
+public interface [[${entityNameUp}]]Service {
+
+	/**
+	 * 保存角色
+	 *
+	 * @param [[${entityNameLow}]]Form
+	 * @return ResultMap
+	 */
+	//ResultMap save([[${entityNameUp}]]Form [[${entityNameLow}]]Form);
+
+}

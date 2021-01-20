@@ -1,0 +1,23 @@
+package [[${packageName}]].service.impl;
+
+import [[${packageName}]].service.[[${entityNameUp}]]Service;
+
+/**
+ * 描述：
+ *
+ * @author Administrator
+ */
+public class [[${entityNameUp}]]ServiceImpl implements [[${entityNameUp}]]Service {
+
+	/**
+	 * 保存角色
+	 *
+	 * @param [[${entityNameLow}]]Form
+	 * @return ResultMap
+	 */
+	ResultMap save([[${entityNameUp}]]Form [[${entityNameLow}]]Form){
+
+		return new ResultMap(ResultMap.SUCCESS_CODE);
+	}
+
+}

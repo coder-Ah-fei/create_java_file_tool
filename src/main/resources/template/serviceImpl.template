@@ -1,0 +1,31 @@
+package [[${packageName}]].service.impl;
+
+import [[${packageName}]].form.[[${entityNameUp}]]Form;
+import [[${packageName}]].repository.[[${entityNameUp}]]Repository;
+import [[${packageName}]].service.[[${entityNameUp}]]Service;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+/**
+ * 描述：
+ *
+ * @author Administrator
+ */
+@Service
+public class [[${entityNameUp}]]ServiceImpl implements [[${entityNameUp}]]Service {
+
+	@Autowired
+	private [[${entityNameUp}]]Repository [[${entityNameLow}]]Repository;
+
+	/**
+	 * 获取数据
+	 *
+	 * @param [[${entityNameLow}]]Form
+	 * @return ResultMap
+	 */
+	@Override
+	ResultMap list[[${entityNameUp}]]s([[${entityNameUp}]]Form [[${entityNameLow}]]Form, Page page){
+
+		return null;
+	}
+
+}
