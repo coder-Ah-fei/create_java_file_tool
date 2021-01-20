@@ -13,6 +13,6 @@ public interface [[${entityNameUp}]]Service {
 	 * @param [[${entityNameLow}]]Form
 	 * @return ResultMap
 	 */
-	ResultMap list[[${entityNameUp}]]s([[${entityNameUp}]]Form [[${entityNameLow}]]Form, Page page);
+	ResultMap list[[${entityNameUp}]]s([[${entityNameUp}]]Form [[${entityNameLow}]]Form);
 
 }
