@@ -3,6 +3,7 @@ package [[${packageName}]].service.impl;
 import [[${packageName}]].form.[[${entityNameUp}]]Form;
 import [[${packageName}]].repository.[[${entityNameUp}]]Repository;
 import [[${packageName}]].service.[[${entityNameUp}]]Service;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -58,8 +59,13 @@ public class [[${entityNameUp}]]ServiceImpl implements [[${entityNameUp}]]Servic
 			[[${entityNameLow}]]List = [[${entityNameLow}]]Page.getContent();
 		}
 		List<[[${entityNameUp}]]Dto> list = new ArrayList< >();
+		[[${entityNameUp}]]Dto [[${entityNameLow}]]Dto;
 		for ([[${entityNameUp}]] [[${entityNameLow}]] : [[${entityNameLow}]]List) {
+            [[${entityNameLow}]]Dto = new [[${entityNameUp}]]Dto();
+        	BeanUtils.copyProperties([[${entityNameLow}]], [[${entityNameLow}]]Dto);
 
+
+            list.add([[${entityNameLow}]]Dto);
 		}
 		long count = [[${entityNameLow}]]Repository.count(specification);
 		Map<String, Object> map = new HashMap< >();

@@ -1,5 +1,7 @@
 package [[${packageName}]].service;
 
+import [[${packageName}]].form.[[${entityNameUp}]]Form;
+
 /**
  * 描述：
  *
@@ -8,11 +10,11 @@ package [[${packageName}]].service;
 public interface [[${entityNameUp}]]Service {
 
 	/**
-	 * 保存角色
+	 * 获取数据
 	 *
 	 * @param [[${entityNameLow}]]Form
 	 * @return ResultMap
 	 */
-	//ResultMap save([[${entityNameUp}]]Form [[${entityNameLow}]]Form);
+	ResultMap list[[${entityNameUp}]]s([[${entityNameUp}]]Form [[${entityNameLow}]]Form);
 
 }

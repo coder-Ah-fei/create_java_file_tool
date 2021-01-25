@@ -1,11 +1,19 @@
 plugins {
     id 'java'
+    id 'idea'
 }
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
 group 'org.example'
 version '1.0-SNAPSHOT'
+
+
+ext {
+    profile = System.getProperty("env") ?: "dev"
+    println "[current profile]:" + profile
+}
+
 
 repositories {
     maven { url 'https://maven.aliyun.com/repository/public/' }
@@ -19,6 +27,9 @@ dependencies {
     compile group: 'org.thymeleaf', name: 'thymeleaf', version: '3.0.11.RELEASE'
     // https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring5
     compile group: 'org.thymeleaf', name: 'thymeleaf-spring5', version: '3.0.11.RELEASE'
+
+// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-gradle-plugin
+    compile group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '2.4.2'
 
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
@@ -34,4 +45,17 @@ jar {
 }
 test {
     useJUnitPlatform()
+}
+//清除上次的编译过的文件
+task clearPj(type: Delete) {
+    delete 'build', 'target'
+}
+task copyJar(type: Copy) {
+    from configurations.runtime
+    into('build/libs/lib')
+}
+//把JAR复制到目标目录
+task release(type: Copy, dependsOn: [build, copyJar]) {
+// from 'conf'
+// into ('build/libs/eachend/conf') // 目标位置
 }

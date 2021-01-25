@@ -1,9 +1,16 @@
 Manifest-Version: 1.0
 Main-Class: com.ycncc.App
 Class-Path:  lib//spring-context-5.3.1.jar lib//thymeleaf-spring5-3.0.11
- .RELEASE.jar lib//thymeleaf-3.0.11.RELEASE.jar lib//spring-aop-5.3.1.ja
- r lib//spring-beans-5.3.1.jar lib//spring-expression-5.3.1.jar lib//spr
- ing-core-5.3.1.jar lib//ognl-3.1.12.jar lib//attoparser-2.0.5.RELEASE.j
- ar lib//unbescape-1.1.6.RELEASE.jar lib//slf4j-api-1.7.25.jar lib//spri
- ng-jcl-5.3.1.jar lib//javassist-3.20.0-GA.jar
+ .RELEASE.jar lib//thymeleaf-3.0.11.RELEASE.jar lib//spring-boot-gradle-
+ plugin-2.4.2.jar lib//spring-aop-5.3.1.jar lib//spring-beans-5.3.1.jar 
+ lib//spring-expression-5.3.1.jar lib//spring-boot-buildpack-platform-2.
+ 4.2.jar lib//spring-boot-loader-tools-2.4.2.jar lib//spring-core-5.3.3.
+ jar lib//ognl-3.1.12.jar lib//attoparser-2.0.5.RELEASE.jar lib//unbesca
+ pe-1.1.6.RELEASE.jar lib//slf4j-api-1.7.25.jar lib//dependency-manageme
+ nt-plugin-1.0.11.RELEASE.jar lib//commons-compress-1.20.jar lib//javass
+ ist-3.20.0-GA.jar lib//spring-jcl-5.3.3.jar lib//jackson-module-paramet
+ er-names-2.11.4.jar lib//jackson-databind-2.11.4.jar lib//jna-platform-
+ 5.5.0.jar lib//httpclient-4.5.13.jar lib//jackson-annotations-2.11.4.ja
+ r lib//jackson-core-2.11.4.jar lib//jna-5.5.0.jar lib//httpcore-4.4.13.
+ jar lib//commons-logging-1.2.jar lib//commons-codec-1.11.jar
 

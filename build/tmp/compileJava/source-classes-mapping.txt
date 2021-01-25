@@ -1,5 +1,7 @@
 com/ycncc/entity/Function.java
  com.ycncc.entity.Function
+com/ycncc/common/enums/FileType.java
+ com.ycncc.common.enums.FileType
 com/ycncc/factory/FileFactory.java
  com.ycncc.factory.FileFactory
 com/ycncc/entity/City.java

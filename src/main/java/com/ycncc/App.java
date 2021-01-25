@@ -1,8 +1,11 @@
 package com.ycncc;
 
+import com.ycncc.common.enums.FileType;
+import com.ycncc.factory.FileFactory;
 import com.ycncc.factory.FileRepositoryFactory;
 import com.ycncc.factory.FileServiceFactory;
 import com.ycncc.factory.FileServiceImplFactory;
+import org.springframework.cglib.proxy.Factory;
 import org.springframework.util.StringUtils;
 
 import javax.swing.*;
@@ -57,10 +60,21 @@ public class App {
 				String name = files[i].getName();
 				String[] split = name.split(".java");
 				String fileName = split[0];
+
+//				new FileServiceFactory().createFile(packageName, filePath, fileName);
+//				new FileServiceImplFactory().createFile(packageName, filePath, fileName);
+//				new FileRepositoryFactory().createFile(packageName, filePath, fileName);
 				
-				new FileServiceFactory().createFile(packageName, filePath, fileName);
-				new FileServiceImplFactory().createFile(packageName, filePath, fileName);
-				new FileRepositoryFactory().createFile(packageName, filePath, fileName);
+				FileFactory.createFile(packageName, filePath, fileName, FileType.form);
+				FileFactory.createFile(packageName, filePath, fileName, FileType.dto);
+				FileFactory.createFile(packageName, filePath, fileName, FileType.repository);
+				FileFactory.createFile(packageName, filePath, fileName, FileType.service);
+				FileFactory.createFile(packageName, filePath, fileName, FileType.serviceImpl);
+
+//				new FileServiceFactory().createFile(packageName, filePath, fileName);
+//				new FileServiceImplFactory().createFile(packageName, filePath, fileName);
+//				new FileRepositoryFactory().createFile(packageName, filePath, fileName);
+			
 			}
 			JOptionPane.showMessageDialog(null, "操作完成", "提示", JOptionPane.INFORMATION_MESSAGE);
 		});

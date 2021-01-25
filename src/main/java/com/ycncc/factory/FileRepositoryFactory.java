@@ -1,5 +1,6 @@
 package com.ycncc.factory;
 
+import com.ycncc.common.enums.FileType;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.templateresolver.StringTemplateResolver;

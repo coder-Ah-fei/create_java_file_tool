@@ -1,0 +1,10 @@
+package [[${packageName}]].form;
+
+/**
+ * 描述：
+ *
+ * @author Administrator
+ */
+public class [[${entityNameUp}]]Form {
+
+}

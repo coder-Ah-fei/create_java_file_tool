@@ -1,0 +1,10 @@
+package [[${packageName}]].dto;
+
+/**
+ * 描述：
+ *
+ * @author Administrator
+ */
+public class [[${entityNameUp}]]Dto {
+
+}
