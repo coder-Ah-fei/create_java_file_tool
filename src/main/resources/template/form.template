@@ -1,10 +1,11 @@
 package [[${packageName}]].form;
 
+import [[${packageName}]].form.basic.BaseForm;
 /**
  * 描述：
  *
  * @author Administrator
  */
-public class [[${entityNameUp}]]Form {
+public class [[${entityNameUp}]]Form extends BaseForm {
 
 }

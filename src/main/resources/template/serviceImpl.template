@@ -1,5 +1,6 @@
 package [[${packageName}]].service.impl;
 
+import [[${packageName}]].dto.ResultMap;
 import [[${packageName}]].form.[[${entityNameUp}]]Form;
 import [[${packageName}]].repository.[[${entityNameUp}]]Repository;
 import [[${packageName}]].service.[[${entityNameUp}]]Service;
@@ -53,10 +54,12 @@ public class [[${entityNameUp}]]ServiceImpl implements [[${entityNameUp}]]Servic
 		List<[[${entityNameUp}]]> [[${entityNameLow}]]List;
 		if ([[${entityNameLow}]]Form.getPageNow() == -1) {
 			[[${entityNameLow}]]List = [[${entityNameLow}]]Repository.findAll(specification);
+            map.put("count", [[${entityNameLow}]]List.size());
 		} else {
 			Pageable pageable = PageRequest.of([[${entityNameLow}]]Form.getPageNow() - 1, [[${entityNameLow}]]Form.getPageSize());
 			Page<[[${entityNameUp}]]> [[${entityNameLow}]]Page = [[${entityNameLow}]]Repository.findAll(specification, pageable);
 			[[${entityNameLow}]]List = [[${entityNameLow}]]Page.getContent();
+            map.put("count", [[${entityNameLow}]]Page.getTotalElements());
 		}
 		List<[[${entityNameUp}]]Dto> list = new ArrayList< >();
 		[[${entityNameUp}]]Dto [[${entityNameLow}]]Dto;
@@ -70,7 +73,7 @@ public class [[${entityNameUp}]]ServiceImpl implements [[${entityNameUp}]]Servic
 		long count = [[${entityNameLow}]]Repository.count(specification);
 		Map<String, Object> map = new HashMap< >();
 		map.put("list", list);
-		map.put("count", count);
+
 		return new ResultMap< >(ResultMap.SUCCESS_CODE, map);
 	}
 

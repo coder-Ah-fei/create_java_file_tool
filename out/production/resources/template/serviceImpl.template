@@ -1,5 +1,6 @@
 package [[${packageName}]].service.impl;
 
+import [[${packageName}]].dto.ResultMap;
 import [[${packageName}]].form.[[${entityNameUp}]]Form;
 import [[${packageName}]].repository.[[${entityNameUp}]]Repository;
 import [[${packageName}]].service.[[${entityNameUp}]]Service;
