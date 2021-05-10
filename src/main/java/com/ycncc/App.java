@@ -70,6 +70,7 @@ public class App {
 				FileFactory.createFile(packageName, filePath, fileName, FileType.repository);
 				FileFactory.createFile(packageName, filePath, fileName, FileType.service);
 				FileFactory.createFile(packageName, filePath, fileName, FileType.serviceImpl);
+				FileFactory.createFile(packageName, filePath, fileName, FileType.controller);
 
 //				new FileServiceFactory().createFile(packageName, filePath, fileName);
 //				new FileServiceImplFactory().createFile(packageName, filePath, fileName);

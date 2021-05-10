@@ -10,6 +10,7 @@ public enum FileType {
 	repository("Repository", "/repository"),
 	service("Service", "/service"),
 	serviceImpl("ServiceImpl", "/service/impl"),
+	controller("Controller", "/controller"),
 	;
 	
 	/**

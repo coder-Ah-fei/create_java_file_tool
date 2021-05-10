@@ -1,0 +1,48 @@
+package [[${packageName}]].controller;
+
+import [[${packageName}]].dto.ResultMap;
+import [[${packageName}]].form.[[${entityNameUp}]]Form;
+import [[${packageName}]].service.[[${entityNameUp}]]Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * 描述：接收前台
+ *
+ * @author yang
+ * @date 2021-05-10
+ */
+@RestController
+@RequestMapping(value = "/private/manage/[[${entityNameLow}]]")
+public class [[${entityNameUp}]]Controller {
+
+	@Autowired
+	private [[${entityNameUp}]]Service [[${entityNameLow}]]Service;
+
+	/**
+	 * 查询列表
+	 *
+	 * @param [[${entityNameLow}]]Form
+	 * @return
+	 */
+	@PostMapping(value = "list[[${entityNameUp}]]s", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResultMap list[[${entityNameUp}]]s([[${entityNameUp}]]Form [[${entityNameLow}]]Form) {
+		ResultMap map = [[${entityNameLow}]]Service.list[[${entityNameUp}]]s([[${entityNameLow}]]Form);
+		return map;
+	}
+
+	/**
+	 * 新增、更新
+	 *
+	 * @param [[${entityNameLow}]]Form
+	 * @return
+	 */
+	@PostMapping(value = "save[[${entityNameUp}]]", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResultMap save[[${entityNameUp}]]([[${entityNameUp}]]Form [[${entityNameLow}]]Form) {
+		ResultMap map = [[${entityNameLow}]]Service.save[[${entityNameUp}]]([[${entityNameLow}]]Form);
+		return map;
+	}
+}
