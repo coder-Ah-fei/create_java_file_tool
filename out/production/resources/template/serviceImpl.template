@@ -1,10 +1,13 @@
 package [[${packageName}]].service.impl;
 
+import [[${packageName}]].common.enums.SaveType;
 import [[${packageName}]].dto.ResultMap;
 import [[${packageName}]].dto.PageMap;
+import [[${packageName}]].dto.[[${entityNameUp}]]Dto;
 import [[${packageName}]].form.[[${entityNameUp}]]Form;
 import [[${packageName}]].repository.[[${entityNameUp}]]Repository;
 import [[${packageName}]].service.[[${entityNameUp}]]Service;
+import [[${packageName}]].entity.[[${entityNameUp}]];
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,16 +15,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 /**
  * 描述：
  *
- * @author Administrator
+ * @author [[${entityNameUp}]]
  */
 @Service
 public class [[${entityNameUp}]]ServiceImpl implements [[${entityNameUp}]]Service {
@@ -37,21 +39,8 @@ public class [[${entityNameUp}]]ServiceImpl implements [[${entityNameUp}]]Servic
 	 */
 	@Override
 	public ResultMap list[[${entityNameUp}]]s([[${entityNameUp}]]Form [[${entityNameLow}]]Form){
-        Specification<[[${entityNameUp}]]> specification = (root, criteriaQuery, criteriaBuilder) -> {
-//			List<Predicate> pr = new ArrayList< >();
-//				if (!StringUtils.empty(articleForm.getSectionName())) {
-//					Join<Object, Object> section = root.join("section");
-//					pr.add(builder.equal(section.get("sectionName"), articleForm.getSectionName()));
-//				}
+        Specification<[[${entityNameUp}]]> specification = getSpecification([[${entityNameLow}]]Form);
 
-//			if (!StringUtils.empty(litigationEnvelopeBrandForm.getBrandName())) {
-//				pr.add(criteriaBuilder.equal(root.get("brandName").as(String.class), litigationEnvelopeBrandForm.getBrandName()));
-//			}
-//			criteriaQuery.where(pr.toArray(new Predicate[pr.size()]));
-
-			criteriaQuery.orderBy(criteriaBuilder.desc(root.get("createDate")));
-			return criteriaQuery.getRestriction();
-		};
 		List<[[${entityNameUp}]]> [[${entityNameLow}]]List;
         Long count = 0L;
 		if ([[${entityNameLow}]]Form.getPageNow() == -1) {
@@ -75,4 +64,49 @@ public class [[${entityNameUp}]]ServiceImpl implements [[${entityNameUp}]]Servic
 		return new ResultMap< >(ResultMap.SUCCESS_CODE, PageMap.of(count, list));
 	}
 
+
+    /**
+	 * 新增、更新
+	 *
+	 * @param [[${entityNameLow}]]Form
+	 * @return
+	 */
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public ResultMap save[[${entityNameUp}]]([[${entityNameUp}]]Form [[${entityNameLow}]]Form) {
+		if (SaveType.add.equals([[${entityNameLow}]]Form.getSaveType())) {
+			[[${entityNameUp}]] [[${entityNameLow}]] = new [[${entityNameUp}]]();
+			BeanUtils.copyProperties([[${entityNameLow}]]Form, [[${entityNameLow}]]);
+			[[${entityNameLow}]]Repository.save([[${entityNameLow}]]);
+		} else if (SaveType.edit.equals([[${entityNameLow}]]Form.getSaveType())) {
+			Optional<[[${entityNameUp}]]> [[${entityNameLow}]]Optional = [[${entityNameLow}]]Repository.findById([[${entityNameLow}]]Form.getId());
+			if (![[${entityNameLow}]]Optional.isPresent()) {
+				return ResultMap.of("没有找到要修改的数据");
+			}
+			[[${entityNameUp}]] [[${entityNameLow}]] = [[${entityNameLow}]]Optional.get();
+			[[${entityNameLow}]]Repository.save([[${entityNameLow}]]);
+		} else {
+			return ResultMap.of("请设置保存类型");
+		}
+		return ResultMap.success();
+	}
+
+    private Specification getSpecification([[${entityNameUp}]]Form [[${entityNameLow}]]Form) {
+		Specification<[[${entityNameUp}]]> specification = (root, criteriaQuery, criteriaBuilder) -> {
+        //			List<Predicate> pr = new ArrayList< >();
+        //				if (!StringUtils.empty(articleForm.getSectionName())) {
+        //					Join<Object, Object> section = root.join("section");
+        //					pr.add(builder.equal(section.get("sectionName"), articleForm.getSectionName()));
+        //				}
+
+        //			if (!StringUtils.empty(litigationEnvelopeBrandForm.getBrandName())) {
+        //				pr.add(criteriaBuilder.equal(root.get("brandName").as(String.class), litigationEnvelopeBrandForm.getBrandName()));
+        //			}
+        //			criteriaQuery.where(pr.toArray(new Predicate[pr.size()]));
+
+            criteriaQuery.orderBy(criteriaBuilder.desc(root.get("createDate")));
+            return criteriaQuery.getRestriction();
+        };
+		return specification;
+	}
 }

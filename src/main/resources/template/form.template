@@ -14,5 +14,5 @@ import lombok.experimental.Accessors;
  @Setter
  @Accessors(chain = true)
 public class [[${entityNameUp}]]Form extends BaseForm {
-	private Integer id;
+
 }

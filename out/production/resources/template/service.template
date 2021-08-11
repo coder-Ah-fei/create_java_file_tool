@@ -18,4 +18,11 @@ public interface [[${entityNameUp}]]Service {
 	 */
 	ResultMap list[[${entityNameUp}]]s([[${entityNameUp}]]Form [[${entityNameLow}]]Form);
 
+	/**
+	 * 新增、更新
+	 *
+	 * @param [[${entityNameLow}]]Form
+	 * @return
+	 */
+	ResultMap save[[${entityNameUp}]]([[${entityNameUp}]]Form [[${entityNameLow}]]Form);
 }

@@ -64,17 +64,24 @@ public class App {
 //				new FileServiceFactory().createFile(packageName, filePath, fileName);
 //				new FileServiceImplFactory().createFile(packageName, filePath, fileName);
 //				new FileRepositoryFactory().createFile(packageName, filePath, fileName);
-				
-				FileFactory.createFile(packageName, filePath, fileName, FileType.form);
-				FileFactory.createFile(packageName, filePath, fileName, FileType.dto);
-				FileFactory.createFile(packageName, filePath, fileName, FileType.repository);
-				FileFactory.createFile(packageName, filePath, fileName, FileType.service);
-				FileFactory.createFile(packageName, filePath, fileName, FileType.serviceImpl);
-				FileFactory.createFile(packageName, filePath, fileName, FileType.controller);
-
 //				new FileServiceFactory().createFile(packageName, filePath, fileName);
 //				new FileServiceImplFactory().createFile(packageName, filePath, fileName);
 //				new FileRepositoryFactory().createFile(packageName, filePath, fileName);
+				
+				FileFactory.createFile(packageName, "D:\\ideaworkspace\\auto_insurance_installment\\dao\\src\\main\\java\\com\\ycncc\\auto", fileName, FileType.form);
+				FileFactory.createFile(packageName, "D:\\ideaworkspace\\auto_insurance_installment\\dao\\src\\main\\java\\com\\ycncc\\auto", fileName, FileType.dto);
+				FileFactory.createFile(packageName, "D:\\ideaworkspace\\auto_insurance_installment\\dao\\src\\main\\java\\com\\ycncc\\auto", fileName, FileType.repository);
+				FileFactory.createFile(packageName, "D:\\ideaworkspace\\auto_insurance_installment\\service\\src\\main\\java\\com\\ycncc\\auto", fileName, FileType.service);
+				FileFactory.createFile(packageName, "D:\\ideaworkspace\\auto_insurance_installment\\service\\src\\main\\java\\com\\ycncc\\auto", fileName, FileType.serviceImpl);
+				FileFactory.createFile(packageName, "D:\\ideaworkspace\\auto_insurance_installment\\api\\src\\main\\java\\com\\ycncc\\auto", fileName, FileType.controller);
+
+//				FileFactory.createFile(packageName, filePath, fileName, FileType.form);
+//				FileFactory.createFile(packageName, filePath, fileName, FileType.dto);
+//				FileFactory.createFile(packageName, filePath, fileName, FileType.repository);
+//				FileFactory.createFile(packageName, filePath, fileName, FileType.service);
+//				FileFactory.createFile(packageName, filePath, fileName, FileType.serviceImpl);
+//				FileFactory.createFile(packageName, filePath, fileName, FileType.controller);
+			
 			
 			}
 			JOptionPane.showMessageDialog(null, "操作完成", "提示", JOptionPane.INFORMATION_MESSAGE);
