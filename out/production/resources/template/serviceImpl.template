@@ -74,20 +74,18 @@ public class [[${entityNameUp}]]ServiceImpl implements [[${entityNameUp}]]Servic
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public ResultMap save[[${entityNameUp}]]([[${entityNameUp}]]Form [[${entityNameLow}]]Form) {
-		if (SaveType.add.equals([[${entityNameLow}]]Form.getSaveType())) {
-			[[${entityNameUp}]] [[${entityNameLow}]] = new [[${entityNameUp}]]();
-			BeanUtils.copyProperties([[${entityNameLow}]]Form, [[${entityNameLow}]]);
-			[[${entityNameLow}]]Repository.save([[${entityNameLow}]]);
-		} else if (SaveType.edit.equals([[${entityNameLow}]]Form.getSaveType())) {
+	    [[${entityNameUp}]] [[${entityNameLow}]] = null;
+		if ([[${entityNameLow}]]Form.getId() == null) {
+			[[${entityNameLow}]] = new [[${entityNameUp}]]();
+		} else {
 			Optional<[[${entityNameUp}]]> [[${entityNameLow}]]Optional = [[${entityNameLow}]]Repository.findById([[${entityNameLow}]]Form.getId());
 			if (![[${entityNameLow}]]Optional.isPresent()) {
-				return ResultMap.of("没有找到要修改的数据");
+				return ResultMap.fail("没有找到要修改的数据");
 			}
-			[[${entityNameUp}]] [[${entityNameLow}]] = [[${entityNameLow}]]Optional.get();
-			[[${entityNameLow}]]Repository.save([[${entityNameLow}]]);
-		} else {
-			return ResultMap.of("请设置保存类型");
+			[[${entityNameLow}]] = [[${entityNameLow}]]Optional.get();
 		}
+        BeanUtils.copyProperties([[${entityNameLow}]]Form, [[${entityNameLow}]]);
+        [[${entityNameLow}]]Repository.save([[${entityNameLow}]]);
 		return ResultMap.success();
 	}
 

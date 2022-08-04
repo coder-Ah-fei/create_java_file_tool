@@ -1,0 +1,39 @@
+import request from '@/utils/request'
+
+/**
+ * 查询小区列表
+ * @param query
+ * @returns {AxiosPromise}
+ */
+export function list${entityNameUp}s(query) {
+  return request({
+    url: '/private/manage/${entityNameLow}/list${entityNameUp}s',
+    method: 'POST',
+    data: query
+  })
+}
+
+/**
+ * 保存小区
+ * @param query
+ * @returns {AxiosPromise}
+ */
+export function save${entityNameUp}(query) {
+  return request({
+    url: '/private/manage/${entityNameLow}/save${entityNameUp}',
+    method: 'POST',
+    data: query
+  })
+}
+
+/**
+ * 根据id查询小区
+ * @param id
+ * @returns {AxiosPromise}
+ */
+export function findBy${entityNameUp}Id(id) {
+  return request({
+    url: `/private/manage/${entityNameLow}/findBy${entityNameUp}Id/${'$'}{id}`,
+    method: 'GET',
+  })
+}

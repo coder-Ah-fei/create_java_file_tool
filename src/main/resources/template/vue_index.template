@@ -1,0 +1,159 @@
+<template>
+  <div class="app-container">
+    <el-card class="update-log">
+      <el-form :model="queryParams" ref="queryForm" v-show="showSearch" :inline="true">
+        <#list filds as fild>
+        <el-form-item label="${fild.text}" prop="${fild.name}">
+          <el-input
+            v-model="queryParams.${fild.name}"
+            placeholder="请输入${fild.text}"
+            clearable
+            size="small"
+            style="width: 240px"
+            @keyup.enter.native="handleQuery"
+          />
+        </el-form-item>
+        </#list>
+
+        <el-form-item>
+          <el-button type="primary" size="mini" @click="handleQuery" class="searchContBtnSty"
+          >搜索&nbsp;&nbsp;<i class=" el-icon-search"></i></el-button>
+          <el-button icon="el-icon-refresh" class="default_canale" size="mini" @click="resetQuery">重置</el-button>
+        </el-form-item>
+      </el-form>
+
+      <el-row :gutter="10" class="mb8">
+        <el-col :span="1.5">
+          <el-button
+            type="primary"
+            plain
+            icon="el-icon-plus"
+            size="mini"
+            @click="handleAdd"
+            class="addContBtnSty"
+          >新增
+          </el-button>
+        </el-col>
+        <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
+      </el-row>
+
+      <el-table v-loading="loading" ref="multipleTable" :data="list" @selection-change="handleSelectionChange">
+        <el-table-column type="selection" width="55" align="center"/>
+    <#list filds as fild>
+        <el-table-column prop="${fild.name}" label="${fild.text}" :show-overflow-tooltip="true"/>
+    </#list>
+
+        <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+          <template slot-scope="scope">
+            <el-tooltip v-hasPermi="['system:role:edit']" class="item" effect="dark" content="修改" placement="bottom">
+              <el-button
+                size="mini"
+                type="text"
+                icon="el-icon-edit"
+                @click="handleUpdate(scope.row)"
+                class="color_font"
+              >
+              </el-button>
+            </el-tooltip>
+          </template>
+        </el-table-column>
+      </el-table>
+
+      <pagination
+        v-show="total>0"
+        :total="total"
+        :page.sync="queryParams.pageNow"
+        :limit.sync="queryParams.pageSize"
+        @pagination="getList"
+      />
+    </el-card>
+
+    <${entityNameLow}-add ref="${entityNameLow}Add" v-model="saveDialog.dialog" :title="saveDialog.title" @loadList="getList()"></${entityNameLow}-add>
+  </div>
+</template>
+
+<script>
+import {list${entityNameUp}s} from "@/api/${entityNameLow}";
+import ${entityNameUp}Add from "@/views/data/${entityNameLow}/add";
+
+export default {
+  name: "${entityNameUp}",
+  components: {
+    ${entityNameUp}Add
+  },
+  data() {
+    return {
+      saveDialog: {
+        dialog: false,
+        title: ''
+      },
+      loading: false,
+      showSearch: true,
+      total: 0,
+      list: [],
+      ids: [],
+      queryParams: {
+        pageNow: 1,
+        pageSize: 10,
+
+        <#list filds as fild>
+        ${fild.name}: '',
+        </#list>
+
+                status: {value: ''},
+      },
+    };
+  },
+  created() {
+    this.getList();
+  },
+  methods: {
+    /** 查询角色列表 */
+    getList() {
+      this.loading = true;
+      list${entityNameUp}s(this.queryParams).then(
+        response => {
+          this.list = response.result.list;
+          this.total = response.result.count;
+          this.loading = false;
+        }
+      );
+    },
+    // 多选框选中数据
+    handleSelectionChange(selection) {
+      this.ids = selection.map(item => item.id)
+    },
+
+    /** 搜索按钮操作 */
+    handleQuery() {
+      this.queryParams.pageNow = 1;
+      this.getList();
+    },
+    /** 重置按钮操作 */
+    resetQuery() {
+      this.dateRange = [];
+      this.resetForm("queryForm");
+      this.handleQuery();
+    },
+
+
+    /** 新增按钮操作 */
+    handleAdd() {
+      this.saveDialog.dialog = true;
+      this.saveDialog.title = "新增小区";
+    },
+    /** 修改按钮操作 */
+    handleUpdate(row) {
+      this.saveDialog.dialog = true;
+      this.saveDialog.title = "修改小区";
+      this.$refs.${entityNameLow}Add.findByIdFun(row.id);
+    },
+  }
+};
+</script>
+<style>
+.tasklist .el-dialog {
+  max-height: 90%;
+  overflow: scroll;
+}
+</style>

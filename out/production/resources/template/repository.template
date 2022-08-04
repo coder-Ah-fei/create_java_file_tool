@@ -11,6 +11,6 @@ import java.util.List;
  *
  * @author Administrator
  */
-public interface [[${entityNameUp}]]Repository extends JpaRepository<[[${entityNameUp}]], Integer>, JpaSpecificationExecutor {
+public interface [[${entityNameUp}]]Repository extends JpaRepository<[[${entityNameUp}]], Long>, JpaSpecificationExecutor {
 
 }

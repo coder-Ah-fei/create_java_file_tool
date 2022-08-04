@@ -1,0 +1,115 @@
+<template>
+  <div class="app-container">
+    <!-- 添加或修改角色配置对话框 -->
+    <el-dialog class="dialog_box" v-dialogDrag :title="title" :visible="open" width="800px" append-to-body
+               :close-on-click-modal="false" @close="closeFun">
+      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+      <#list filds as fild>
+        <el-form-item label="${fild.text}" prop="${fild.name}">
+          <el-input v-model="form.${fild.name}" placeholder="请输入${fild.text}"/>
+        </el-form-item>
+      </#list>
+
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" class="buttonBackSty" @click="submitForm">确 定</el-button>
+        <el-button @click="cancel" class="default_canale">取 消</el-button>
+      </div>
+    </el-dialog>
+
+  </div>
+</template>
+
+<script>
+import {save${entityNameUp}, findBy${entityNameUp}Id} from "@/api/${entityNameLow}";
+import {findEnumByNames} from "@/api/common";
+
+export default {
+  name: "${entityNameUp}Add",
+  model: {
+    prop: "open",
+    event: "change"
+  },
+  props: {
+    open: {
+      type: Boolean,
+      default: false
+    },
+    title: {
+      type: String,
+      default: ""
+    },
+  },
+  data() {
+    return {
+    enumList: {},
+      // 查询参数
+      queryParams: {
+        pageNow: 1,
+        pageSize: 10,
+      },
+      // 表单参数
+      form: {
+      <#list filds as fild>
+        ${fild.name}: '',
+      </#list>
+
+        status: {value: ''},
+      },
+      // 表单校验
+      rules: {
+            <#list filds as fild>
+            ${fild.name}: [
+              {required: true, message: "${fild.text}不能为空", trigger: "blur"}
+            ],
+            </#list>
+      }
+    };
+  },
+  created() {
+  },
+  mounted() {
+    this.findEnumByNamesFun();
+  },
+  methods: {
+    findEnumByNamesFun() {
+    let enumNames = [];
+    if(enumNames.length <= 0) {
+    return;
+    }
+      findEnumByNames({enumNames: enumNames}).then(
+        response => {
+          this.enumList = response.result;
+        }
+      );
+    },
+    findByIdFun(id) {
+      findBy${entityNameUp}Id(id).then(res => {
+        this.form = res.result;
+      });
+    },
+    closeFun() {
+      this.$emit("change", false);
+    }, // 取消按钮
+    cancel() {
+      this.$emit("change", false);
+      this.resetForm("form");
+    },
+    /** 提交按钮 */
+    submitForm: function () {
+      this.$refs["form"].validate(valid => {
+        if (valid) {
+          save${entityNameUp}(this.form).then(response => {
+            this.msgSuccess("修改成功");
+            this.cancel();
+            this.$emit("loadList");
+          });
+        }
+      });
+    },
+  }
+};
+</script>
+<style>
+
+</style>
